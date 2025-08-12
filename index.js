@@ -8,8 +8,9 @@ import { AppError } from "./src/utilities/AppError.js";
 import cookieParser from "cookie-parser";
 import { app, server } from "./src/services/socket.js";
 import userRoutes from "./src/Routes/user.routes.js";
-import getMessage from "./src/locales/translator.js";
+
 import tagRoutes from "./src/Routes/tag.routes.js";
+import voacationRoutes from "./src/Routes/vocation.routes.js";
 
 connection();
 
@@ -25,6 +26,7 @@ app.use(cors());
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/tag", tagRoutes);
+app.use("/api/v1/vocation", voacationRoutes);
 // handle foriegn routes
 app.all("*", (req, res, next) => {
   next(new AppError(`invalid url ${req.originalUrl}`, 404));

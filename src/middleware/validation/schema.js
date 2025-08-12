@@ -169,3 +169,43 @@ export const createTagSchema = Joi.object({
     })
   ),
 });
+export const updateTagSchema = Joi.object({
+  title: Joi.string().min(3).max(30).required().messages({
+    "string.empty": "title is required.",
+    "string.min": "title must be at least 3 characters.",
+    "string.max": "title must not exceed 30 characters.",
+  }),
+  color: Joi.string()
+    .pattern(/^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/)
+    .required()
+    .messages({
+      "string.empty": "Color is required.",
+      "string.pattern.base":
+        "Color must be a valid hex code (e.g., #fff or #ffffff).",
+    }),
+});
+export const createVocationSchema = Joi.object({
+  title: Joi.string()
+    .pattern(/^[A-Za-z\s]+$/) // Only English letters and spaces
+    .min(3)
+    .max(30)
+    .required()
+    .messages({
+      "string.empty": "title is required.",
+      "string.pattern.base": "title must contain only English letters.",
+      "string.min": "title must be at least 3 characters.",
+      "string.max": "title must not exceed 30 characters.",
+    }),
+
+  title_ar: Joi.string()
+    .pattern(/^[\u0600-\u06FF\s]+$/) // Only Arabic letters and spaces
+    .min(3)
+    .max(30)
+    .required()
+    .messages({
+      "string.empty": "title_ar is required.",
+      "string.pattern.base": "title_ar must contain only Arabic letters.",
+      "string.min": "title_ar must be at least 3 characters.",
+      "string.max": "title_ar must not exceed 30 characters.",
+    }),
+});
