@@ -34,4 +34,9 @@ export default {
   vocation_notFound: "vocation not found",
   vocation_deleted: "vocation deleted successfully",
   vocation_updated: "vocation updated successfully",
+  project_created: "Project created successfully",
+  project_notFound: "Project not found",
+  project_updated: "Project updated successfully",
+  project_deleted: "Project deleted successfully",
+  forbidden: "You do not have permission to access this resource",
 };

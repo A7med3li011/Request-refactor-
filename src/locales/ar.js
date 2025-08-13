@@ -30,6 +30,12 @@ export default {
   vocation_created: "تم إنشاء المهنة بنجاح",
   vocation_found: "تم العثور على المهن بنجاح",
   vocation_notFound: "المهنة غير موجودة",
-  vocation_deleted:"تم حذف المهنة بنجاح",
+  vocation_deleted: "تم حذف المهنة بنجاح",
   vocation_updated: "تم تحديث المهنة بنجاح",
+  project_created: "تم إنشاء المشروع بنجاح",
+  project_notFound: "المشروع غير موجود",
+  project_updated: "تم تحديث المشروع بنجاح",
+  project_deleted: "تم حذف المشروع بنجاح",
+  project_found: "تم العثور على المشاريع بنجاح",
+  forbidden:"ليس لديك صلاحية للوصول إلى هذا المورد",
 };

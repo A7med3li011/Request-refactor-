@@ -209,3 +209,56 @@ export const createVocationSchema = Joi.object({
       "string.max": "title_ar must not exceed 30 characters.",
     }),
 });
+
+/////////////////// PROJECTS ///////////////
+
+export const createProjectSchema = Joi.object({
+  title: Joi.string().min(3).max(30).required().messages({
+    "string.empty": "title is required.",
+    "string.min": "title must be at least 3 characters.",
+    "string.max": "title must not exceed 30 characters.",
+  }),
+  description: Joi.string().min(3).max(100).required().messages({
+    "string.empty": "description is required.",
+    "string.min": "description must be at least 3 characters.",
+    "string.max": "description must not exceed 30 characters.",
+  }),
+  location: Joi.string().min(3).max(100).required().messages({
+    "string.empty": "location is required.",
+    "string.min": "location must be at least 3 characters.",
+    "string.max": "location must not exceed 30 characters.",
+  }),
+  priority: Joi.string().valid("low", "medium", "high").required().messages({
+    "any.only": "Priority must be one of: low, medium, or high.",
+    "string.empty": "Priority is required.",
+  }),
+  role: Joi.string().required().valid("owner", "contractor", "consultant"),
+  budget: Joi.number().required().min(10),
+  startDate: Joi.date().min("now").required(),
+  endDate: Joi.date().greater(Joi.ref("startDate")).required(),
+});
+export const updateSchema = Joi.object({
+  title: Joi.string().min(3).max(30).required().messages({
+    "string.empty": "title is required.",
+    "string.min": "title must be at least 3 characters.",
+    "string.max": "title must not exceed 30 characters.",
+  }),
+  description: Joi.string().min(3).max(100).required().messages({
+    "string.empty": "description is required.",
+    "string.min": "description must be at least 3 characters.",
+    "string.max": "description must not exceed 30 characters.",
+  }),
+  location: Joi.string().min(3).max(100).required().messages({
+    "string.empty": "location is required.",
+    "string.min": "location must be at least 3 characters.",
+    "string.max": "location must not exceed 30 characters.",
+  }),
+  priority: Joi.string().valid("low", "medium", "high").required().messages({
+    "any.only": "Priority must be one of: low, medium, or high.",
+    "string.empty": "Priority is required.",
+  }),
+  // role: Joi.string().required().valid("owner", "contractor", "consultant"),
+  // budget: Joi.number().required().min(10),
+  // startDate: Joi.date().min("now").required(),
+  // endDate: Joi.date().max("now").required(),
+});

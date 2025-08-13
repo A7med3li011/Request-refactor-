@@ -11,6 +11,7 @@ import userRoutes from "./src/Routes/user.routes.js";
 
 import tagRoutes from "./src/Routes/tag.routes.js";
 import voacationRoutes from "./src/Routes/vocation.routes.js";
+import projectRoutes from "./src/Routes/project.routes.js";
 
 connection();
 
@@ -27,6 +28,7 @@ app.use(cors());
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/tag", tagRoutes);
 app.use("/api/v1/vocation", voacationRoutes);
+app.use("/api/v1/project", projectRoutes);
 // handle foriegn routes
 app.all("*", (req, res, next) => {
   next(new AppError(`invalid url ${req.originalUrl}`, 404));
