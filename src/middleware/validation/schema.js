@@ -1,5 +1,12 @@
 import Joi from "joi";
+import mongoose from "mongoose";
 
+const objectId = (value, helpers) => {
+  if (!mongoose.Types.ObjectId.isValid(value)) {
+    return helpers.error("any.invalid");
+  }
+  return value;
+};
 ///// signup///////
 export const signupSchema = Joi.object({
   name: Joi.string().min(3).max(30).required().messages({
@@ -306,6 +313,47 @@ export const createReviewsSchema = Joi.object({
     "string.min": "message must be at least 3 characters.",
     "string.max": "message must not exceed 300 characters.",
   }),
+});
 
-  ////////////reviews/////////////
+////////////teams/////////////
+export const createTeamScehama = Joi.object({
+  name: Joi.string().min(3).max(30).required().messages({
+    "string.empty": "Name is required.",
+    "string.min": "Name must be at least 3 characters.",
+    "string.max": "Name must not exceed 30 characters.",
+  }),
+
+  phone: Joi.string().min(10).max(15).required().messages({
+    "string.empty": "Phone number is required.",
+    "string.min": "Phone number must be at least 10 digits.",
+    "string.max": "Phone number must not exceed 15 digits.",
+  }),
+  email: Joi.string().email().required().messages({
+    "string.email": "Email must be a valid email address.",
+    "string.empty": "Email is required.",
+  }),
+
+  password: Joi.string()
+    .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"))
+    .required()
+    .messages({
+      "string.pattern.base":
+        "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, and one special character.",
+      "string.empty": "Password is required.",
+    }),
+
+  rights: Joi.array()
+    .items(Joi.string().valid("read", "create", "update", "delete"))
+    .required()
+    .min(1)
+    .max(4),
+  vocation: Joi.string().custom(objectId, "ObjectId validation").required(),
+  projects: Joi.array()
+    .items(Joi.string().custom(objectId, "ObjectId validation"))
+    .required()
+    .min(1)
+    .messages({
+      "array.min": "At least one project is required.",
+      "any.required": "Projects are required.",
+    }),
 });

@@ -84,7 +84,10 @@ export const getPojectDetails = handlerAsync(async (req, res) => {
 
   const projectExist = await projectModel
     .findById(id)
-    .populate("owner contractor consultant createdBy", "name email role  profileImage");
+    .populate(
+      "owner contractor consultant createdBy",
+      "name email role  profileImage"
+    );
 
   if (!projectExist)
     return next(new AppError(getMessage(lang, "project_notFound"), 404));
@@ -105,8 +108,8 @@ export const deleteProject = handlerAsync(async (req, res) => {
   if (!projectExist)
     return next(new AppError(getMessage(lang, "project_notFound"), 404));
 
-  if (projectExist.createdBy.toString() !== req.user._id.toString())
-    return next(new AppError(getMessage(lang, "forbidden"), 403));
+  // if (projectExist.createdBy.toString() !== req.user._id.toString())
+  //   return next(new AppError(getMessage(lang, "forbidden"), 403));
 
   await projectModel.findByIdAndDelete(id);
   res.status(200).json({
@@ -124,12 +127,12 @@ export const updateProject = handlerAsync(async (req, res) => {
   if (!projectExist)
     return next(new AppError(getMessage(lang, "project_notFound"), 404));
 
-  if (projectExist.createdBy.toString() !== req.user._id.toString())
-    return next(new AppError(getMessage(lang, "forbidden"), 403));
+  // if (projectExist.createdBy.toString() !== req.user._id.toString())
+  //   return next(new AppError(getMessage(lang, "forbidden"), 403));
 
   await projectModel.findByIdAndUpdate(id, data);
   res.status(200).json({
     success: true,
-    message: getMessage(lang, "project_deleted"),
+    message: getMessage(lang, "project_updated"),
   });
 });

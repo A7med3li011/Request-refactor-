@@ -20,20 +20,24 @@ projectRoutes.post(
 );
 projectRoutes.put(
   "/:id",
-  auth(["owner", "contractor", "consultant"]),
+  auth(["owner", "contractor", "consultant", "user"], "update"),
   validate(createProjectSchema),
   updateProject
 );
 
-projectRoutes.get("/", auth(["owner", "contractor", "consultant"]), getPojects);
+projectRoutes.get(
+  "/",
+  auth(["owner", "contractor", "consultant", "user"], "read"),
+  getPojects
+);
 projectRoutes.get(
   "/:id",
-  auth(["owner", "contractor", "consultant"]),
+  auth(["owner", "contractor", "consultant", "user"], "read"),
   getPojectDetails
 );
 projectRoutes.delete(
   "/:id",
-  auth(["owner", "contractor", "consultant"]),
+  auth(["owner", "contractor", "consultant", "user"], "delete"),
   deleteProject
 );
 

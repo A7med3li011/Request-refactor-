@@ -7,7 +7,7 @@ import { createReviewsSchema } from "../middleware/validation/schema.js";
 const reviewRoutes = express.Router();
 reviewRoutes.post(
   "/",
-  auth(["consultant", "owner", "contractor"]),
+  auth(["consultant", "owner", "contractor", "user"], "read"),
   validate(createReviewsSchema),
   createReview
 );

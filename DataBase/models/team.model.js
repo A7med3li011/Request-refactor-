@@ -18,6 +18,12 @@ const teamSchema = new Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Vocation",
         },
+        projects: [
+          {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Project",
+          },
+        ],
       },
     ],
   },

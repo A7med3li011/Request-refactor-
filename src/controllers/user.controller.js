@@ -120,6 +120,7 @@ export const loginOtp = handlerAsync(async (req, res, next) => {
       name: userExist.name,
       role: userExist.role,
       phone: userExist.phone,
+      rights: userExist.rights || [],
     };
     const token = jwt.sign(userData, process.env.SECRETEKEY, {
       expiresIn: "1h",

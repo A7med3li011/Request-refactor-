@@ -36,18 +36,18 @@ userRoutes.put(
   "/profileUpdate",
   multer4server("profile-pic").single("image"),
   validate(updateUserProfileSchema),
-  auth(["owner", "contractor", "consultant", "user"]),
+  auth(["owner", "contractor", "consultant", "user"], "read"),
   updateProfile
 );
 userRoutes.put(
   "/companyUpdate",
   multer4server("company").fields([
-    {name:"companyLogo",maxCount:1},
-    {name:"electronicStamp",maxCount:1},
-    {name:"signature",maxCount:1}
+    { name: "companyLogo", maxCount: 1 },
+    { name: "electronicStamp", maxCount: 1 },
+    { name: "signature", maxCount: 1 },
   ]),
   validate(updateUserCompanySchema),
-  auth(["owner", "contractor", "consultant", "user"]),
+  auth(["owner", "contractor", "consultant", "user"], "read"),
   updateCompany
 );
 

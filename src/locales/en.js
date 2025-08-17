@@ -46,4 +46,8 @@ export default {
   review_deleted: "review deleted successfully",
   review_updated: "review updated successfully",
   review_found: " reviews found successfully",
+  team_created: "team created successfully",
+  team_notFound: "team not found",
+  team_found: "team found successfully",
+  user_deleted: "user deleted successfully",
 };
