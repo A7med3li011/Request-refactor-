@@ -262,3 +262,50 @@ export const updateSchema = Joi.object({
   // startDate: Joi.date().min("now").required(),
   // endDate: Joi.date().max("now").required(),
 });
+
+////////////tickets/////////////
+
+export const createTicketSchema = Joi.object({
+  title: Joi.string().min(3).max(30).required().messages({
+    "string.empty": "title is required.",
+    "string.min": "title must be at least 3 characters.",
+    "string.max": "title must not exceed 30 characters.",
+  }),
+  name: Joi.string().min(3).max(30).required().messages({
+    "string.empty": "name is required.",
+    "string.min": "name must be at least 3 characters.",
+    "string.max": "name must not exceed 30 characters.",
+  }),
+  message: Joi.string().min(3).max(300).required().messages({
+    "string.empty": "message is required.",
+    "string.min": "message must be at least 3 characters.",
+    "string.max": "message must not exceed 300 characters.",
+  }),
+  phone: Joi.string().min(10).max(15).required().messages({
+    "string.empty": "Phone number is required.",
+    "string.min": "Phone number must be at least 10 digits.",
+    "string.max": "Phone number must not exceed 15 digits.",
+  }),
+  email: Joi.string().email().required().messages({
+    "string.email": "Email must be a valid email address.",
+    "string.empty": "Email is required.",
+  }),
+});
+
+////////////reviews/////////////
+
+export const createReviewsSchema = Joi.object({
+  rate: Joi.number().min(1).max(5).required().messages({
+    "number.base": "Rate must be a number.",
+    "number.min": "Rate must be at least 1.",
+    "number.max": "Rate must not exceed 5.",
+    "any.required": "Rate is required.",
+  }),
+  message: Joi.string().min(3).max(300).required().messages({
+    "string.empty": "message is required.",
+    "string.min": "message must be at least 3 characters.",
+    "string.max": "message must not exceed 300 characters.",
+  }),
+
+  ////////////reviews/////////////
+});

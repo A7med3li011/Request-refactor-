@@ -39,4 +39,11 @@ export default {
   project_updated: "Project updated successfully",
   project_deleted: "Project deleted successfully",
   forbidden: "You do not have permission to access this resource",
+  ticket_created: "complaint created successfully",
+  review_exist: "review already exist",
+  review_created: "review created successfully",
+  review_notfound: "review not found",
+  review_deleted: "review deleted successfully",
+  review_updated: "review updated successfully",
+  review_found: " reviews found successfully",
 };

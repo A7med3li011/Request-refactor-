@@ -1,17 +1,22 @@
 import mongoose, { Schema } from "mongoose";
 
-const vocationSchema = new Schema({
-  title: {
-    type: String,
+const vocationSchema = new Schema(
+  {
+    title: {
+      type: String,
+    },
+    title_ar: {
+      type: String,
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
-  title_ar: {
-    type: String,
-  },
-  createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const vocationModel = mongoose.model("Vocation", vocationSchema);
 export default vocationModel;

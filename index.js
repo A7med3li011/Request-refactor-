@@ -8,10 +8,12 @@ import { AppError } from "./src/utilities/AppError.js";
 import cookieParser from "cookie-parser";
 import { app, server } from "./src/services/socket.js";
 import userRoutes from "./src/Routes/user.routes.js";
-
 import tagRoutes from "./src/Routes/tag.routes.js";
 import voacationRoutes from "./src/Routes/vocation.routes.js";
 import projectRoutes from "./src/Routes/project.routes.js";
+import ticketRoutes from "./src/Routes/ticket.routes.js";
+import reviewRoutes from "./src/Routes/review.routes.js";
+import teamRoutes from "./src/Routes/team.routes.js";
 
 connection();
 
@@ -29,6 +31,9 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/tag", tagRoutes);
 app.use("/api/v1/vocation", voacationRoutes);
 app.use("/api/v1/project", projectRoutes);
+app.use("/api/v1/ticket", ticketRoutes);
+app.use("/api/v1/review", reviewRoutes);
+app.use("/api/v1/team", teamRoutes);
 // handle foriegn routes
 app.all("*", (req, res, next) => {
   next(new AppError(`invalid url ${req.originalUrl}`, 404));

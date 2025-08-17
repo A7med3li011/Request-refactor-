@@ -11,7 +11,9 @@ const tagSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-});
+}, {
+    timestamps: true,
+  });
 
 const tagModel = mongoose.model("Tag", tagSchema);
 export default tagModel;

@@ -38,4 +38,12 @@ export default {
   project_deleted: "تم حذف المشروع بنجاح",
   project_found: "تم العثور على المشاريع بنجاح",
   forbidden:"ليس لديك صلاحية للوصول إلى هذا المورد",
+  ticket_created: "تم ارسال الشكوة بنجاح",
+  review_exist: "التقييم موجودة بالفعل",
+review_created: "تم إنشاء التقييم بنجاح",
+review_notfound: "لم يتم العثور على التقييم",
+review_deleted: "تم حذف التقييم بنجاح",
+review_updated: "تم تحديث التقييم بنجاح",
+review_found: "تم العثور على التقييمات بنجاح",
+
 };
