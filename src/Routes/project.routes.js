@@ -9,6 +9,7 @@ import {
   updateProject,
   getPojectDetails,
 } from "../controllers/project.controller.js";
+import { access } from "../middleware/auth/access.js";
 
 const projectRoutes = express.Router();
 
@@ -20,24 +21,28 @@ projectRoutes.post(
 );
 projectRoutes.put(
   "/:id",
-  auth(["owner", "contractor", "consultant", "user"], "update"),
+  auth(["owner", "contractor", "consultant", "user"]),
+  access("update"),
   validate(createProjectSchema),
   updateProject
 );
 
 projectRoutes.get(
   "/",
-  auth(["owner", "contractor", "consultant", "user"], "read"),
+  auth(["owner", "contractor", "consultant", "user"]),
+  access("read"),
   getPojects
 );
 projectRoutes.get(
   "/:id",
-  auth(["owner", "contractor", "consultant", "user"], "read"),
+  auth(["owner", "contractor", "consultant", "user"]),
+  access("read"),
   getPojectDetails
 );
 projectRoutes.delete(
   "/:id",
-  auth(["owner", "contractor", "consultant", "user"], "delete"),
+  auth(["owner", "contractor", "consultant", "user"]),
+  access("delete"),
   deleteProject
 );
 

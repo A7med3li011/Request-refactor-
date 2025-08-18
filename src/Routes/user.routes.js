@@ -22,6 +22,7 @@ import {
 } from "../controllers/user.controller.js";
 import { auth } from "../middleware/auth/auth.js";
 import { multer4server } from "../services/multer.js";
+import { access } from "../middleware/auth/access.js";
 
 const userRoutes = express.Router();
 // const upload = multer4server();
@@ -36,7 +37,8 @@ userRoutes.put(
   "/profileUpdate",
   multer4server("profile-pic").single("image"),
   validate(updateUserProfileSchema),
-  auth(["owner", "contractor", "consultant", "user"], "read"),
+  auth(["owner", "contractor", "consultant", "user"]),
+  access("read"),
   updateProfile
 );
 userRoutes.put(
@@ -47,7 +49,8 @@ userRoutes.put(
     { name: "signature", maxCount: 1 },
   ]),
   validate(updateUserCompanySchema),
-  auth(["owner", "contractor", "consultant", "user"], "read"),
+  auth(["owner", "contractor", "consultant", "user"]),
+  access("read"),
   updateCompany
 );
 

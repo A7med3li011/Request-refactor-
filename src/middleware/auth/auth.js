@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { AppError } from "../../utilities/AppError.js";
 
-export const auth = (role = ["owner"], right = null) => {
+export const auth = (role = ["owner"]) => {
   return (req, res, next) => {
     const token = req.cookies.token;
 
@@ -12,24 +12,11 @@ export const auth = (role = ["owner"], right = null) => {
     jwt.verify(token, process.env.SECRETEKEY, (err, decode) => {
       if (err) return next(new AppError(err.message, 401));
 
-      if (decode && decode?.role == "user") {
-        if (
-          role.includes(decode?.role) &&
-          decode?.rights &&
-          decode?.rights.includes(right)
-        ) {
-          req.user = decode;
-          return next();
-        } else {
-          return next(new AppError("Unauthorized", 403));
-        }
+      if (decode && role.includes(decode?.role)) {
+        req.user = decode;
+        return next();
       } else {
-        if (decode && role.includes(decode?.role)) {
-          req.user = decode;
-          return next();
-        } else {
-          return next(new AppError("Unauthorized", 403));
-        }
+        return next(new AppError("Forbidden", 403));
       }
     });
   };
