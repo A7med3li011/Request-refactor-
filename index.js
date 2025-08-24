@@ -14,6 +14,8 @@ import projectRoutes from "./src/Routes/project.routes.js";
 import ticketRoutes from "./src/Routes/ticket.routes.js";
 import reviewRoutes from "./src/Routes/review.routes.js";
 import teamRoutes from "./src/Routes/team.routes.js";
+import taskRoutes from "./src/Routes/task.routes.js";
+
 
 connection();
 
@@ -26,6 +28,7 @@ app.use(
   })
 );
 app.use(cors());
+app.use(express.static("uploads"));
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/tag", tagRoutes);
@@ -34,6 +37,8 @@ app.use("/api/v1/project", projectRoutes);
 app.use("/api/v1/ticket", ticketRoutes);
 app.use("/api/v1/review", reviewRoutes);
 app.use("/api/v1/team", teamRoutes);
+app.use("/api/v1/task", taskRoutes);
+
 // handle foriegn routes
 app.all("*", (req, res, next) => {
   next(new AppError(`invalid url ${req.originalUrl}`, 404));

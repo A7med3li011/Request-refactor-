@@ -30,6 +30,7 @@ export const createProject = handlerAsync(async (req, res) => {
     location,
     priority,
     createdBy: req.user._id,
+    members: [req.user._id],
   };
 
   switch (role) {

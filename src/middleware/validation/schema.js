@@ -357,3 +357,84 @@ export const createTeamScehama = Joi.object({
       "any.required": "Projects are required.",
     }),
 });
+
+////////////Tasks/////////////
+
+export const createTaskSchema = Joi.object({
+  title: Joi.string().min(3).max(30).required().messages({
+    "string.empty": "title is required.",
+    "string.min": "title must be at least 3 characters.",
+    "string.max": "title must not exceed 30 characters.",
+  }),
+
+  description: Joi.string().min(3).max(300).required().messages({
+    "string.empty": "description is required.",
+    "string.min": "description must be at least 3 characters.",
+    "string.max": "description must not exceed 300 characters.",
+  }),
+
+  startDate: Joi.date().min("now").required(),
+  endDate: Joi.date().greater(Joi.ref("startDate")).required(),
+
+  priority: Joi.string().valid("low", "medium", "high").required().messages({
+    "any.only": "Priority must be one of: low, medium, or high.",
+    "string.empty": "Priority is required.",
+  }),
+
+  tag: Joi.string().custom(objectId, "ObjectId validation").required(),
+  project: Joi.string().custom(objectId, "ObjectId validation").required(),
+  responsible: Joi.string().custom(objectId, "ObjectId validation").required(),
+
+  type: Joi.string()
+    .required()
+    .valid("toq", "milestone", "recurring", "oneTime"),
+
+  price: Joi.number().when("type", {
+    is: "toq",
+    then: Joi.number().required().min(1).messages({
+      "any.required": "price is required when type is 'toq'.",
+      "number.min": "price must be at least 1.",
+    }),
+    otherwise: Joi.forbidden().messages({
+      "any.unknown": "price is not allowed unless type is 'toq'.",
+    }),
+  }),
+
+  quantity: Joi.number().when("type", {
+    is: "toq",
+    then: Joi.number().required().min(1).messages({
+      "any.required": "quantity is required when type is 'toq'.",
+      "number.min": "quantity must be at least 1.",
+    }),
+    otherwise: Joi.forbidden().messages({
+      "any.unknown": "quantity is not allowed unless type is 'toq'.",
+    }),
+  }),
+
+  unit: Joi.string().when("type", {
+    is: "toq",
+    then: Joi.string()
+      .custom(objectId, "ObjectId validation")
+      .required()
+      .messages({
+        "any.required": "unit is required when type is 'toq'.",
+      }),
+    otherwise: Joi.forbidden().messages({
+      "any.unknown": "unit is not allowed unless type is 'toq'.",
+    }),
+  }),
+});
+
+export const uploadTaskfile = Joi.object({
+  taskId: Joi.string().custom(objectId, "ObjectId validation").required(),
+});
+
+export const addNoteTaskSchema = Joi.object({
+  taskId: Joi.string().custom(objectId, "ObjectId validation").required(),
+  title: Joi.string().required(),
+});
+export const executionTaskSchema = Joi.object({
+  executed: Joi.number().required(),
+  approved: Joi.number().required(),
+  invoiced: Joi.number().required(),
+});
